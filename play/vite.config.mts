@@ -7,7 +7,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Inspect from 'vite-plugin-inspect'
 import mkcert from 'vite-plugin-mkcert'
 import glob from 'fast-glob'
-import VueMacros from 'unplugin-vue-macros/vite'
+// import VueMacros from 'unplugin-vue-macros/vite'
 import {
   epPackage,
   epRoot,
@@ -29,12 +29,21 @@ export default defineConfig(async ({ mode }) => {
       preprocessorOptions: {
         scss: {
           // additionalData: `@use "/styles/custom.scss" as *;`,
-          silenceDeprecations: ['legacy-js-api'],
+          silenceDeprecations: ['legacy-js-api', 'color-functions'],
         },
       },
     },
     resolve: {
       alias: [
+        {
+          find: /^@sheryuwei\/plus(\/(es|lib))?$/,
+          replacement: path.resolve(epRoot, 'index.ts'),
+        },
+        {
+          find: /^@sheryuwei\/plus\/(es|lib)\/(.*)$/,
+          replacement: `${pkgRoot}/$2`,
+        },
+        // Support importing our local build via original element-plus entry
         {
           find: /^element-plus(\/(es|lib))?$/,
           replacement: path.resolve(epRoot, 'index.ts'),
@@ -42,6 +51,11 @@ export default defineConfig(async ({ mode }) => {
         {
           find: /^element-plus\/(es|lib)\/(.*)$/,
           replacement: `${pkgRoot}/$2`,
+        },
+        // Support importing sub components via @sheryuwei/plus/components/*
+        {
+          find: /^@sheryuwei\/plus\/components\/(.*)$/,
+          replacement: path.resolve(pkgRoot, 'components/$1'),
         },
       ],
     },
@@ -54,19 +68,14 @@ export default defineConfig(async ({ mode }) => {
       sourcemap: true,
     },
     plugins: [
-      VueMacros({
-        setupComponent: false,
-        setupSFC: false,
-        plugins: {
-          vue: vue(),
-          vueJsx: vueJsx(),
-        },
-      }),
+      vue(),
+      vueJsx(),
       Components({
         include: `${__dirname}/**`,
         resolvers: ElementPlusResolver({
           version: '2.0.0-dev.1',
           importStyle: 'sass',
+          
         }),
         dts: false,
       }),

@@ -25,7 +25,7 @@
       "@element-plus/constants": ["packages/constants"],
       "@element-plus/locale": ["packages/locale"],
       "@element-plus/locale/*": ["packages/locale/*"],
-      "element-plus": ["packages/element-plus"]
+      "@sheryuwei/plus": ["packages/element-plus"]
     },
     "preserveSymlinks": true
   }

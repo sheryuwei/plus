@@ -19,6 +19,6 @@
   },
   "devDependencies": {
     "@vue/test-utils": "catalog:",
-    "vue": "catalog:"
+    "vue": "^3.5.18"
   }
 }

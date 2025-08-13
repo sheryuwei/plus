@@ -16,7 +16,7 @@
     "@vue/shared": "^3.2.37",
     "@vueuse/core": "^9.1.0",
     "clipboard-copy": "^4.0.1",
-    "element-plus": "npm:element-plus@latest",
+    "element-plus": "workspace:@sheryuwei/plus@*",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0"
   },

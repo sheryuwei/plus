@@ -81,7 +81,7 @@ export const getViteConfig = ({ mode }: { mode: string }): ViteConfig => {
 
       // https://github.com/antfu/unplugin-vue-components
       Components({
-        dirs: ['.vitepress/vitepress/components'],
+        dirs: ['.vitepress/vitepress/components', 'examples'],
 
         allowOverrides: true,
 

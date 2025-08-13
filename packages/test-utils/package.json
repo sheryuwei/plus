@@ -7,6 +7,6 @@
   "dependencies": {
     "@vue/test-utils": "catalog:",
     "lodash-unified": "catalog:",
-    "vue": "catalog:"
+    "vue": "^3.5.18"
   }
 }

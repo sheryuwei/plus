@@ -1,8 +1,10 @@
 {
-  "name": "element-plus",
-  "version": "0.0.0-dev.1",
+  "name": "@sheryuwei/plus",
+  "version": "1.0.1",
   "description": "A Component Library for Vue 3",
   "keywords": [
+    "plus",
+    "sheryuwei",
     "element-plus",
     "element",
     "component library",
@@ -10,9 +12,9 @@
     "ui",
     "vue"
   ],
-  "homepage": "https://element-plus.org/",
+  "homepage": "https://github.com/sheryuwei/plus",
   "bugs": {
-    "url": "https://github.com/element-plus/element-plus/issues"
+    "url": "https://github.com/sheryuwei/plus/issues"
   },
   "license": "MIT",
   "main": "lib/index.js",
@@ -63,7 +65,7 @@
   "jsdelivr": "dist/index.full.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/element-plus/element-plus.git"
+    "url": "git+https://github.com/sheryuwei/plus.git"
   },
   "publishConfig": {
     "access": "public"
