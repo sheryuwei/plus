@@ -12,7 +12,6 @@ declare module 'vue' {
     Accessibility: typeof import('./examples/form/accessibility.vue')['default']
     Accordion: typeof import('./examples/tree/accordion.vue')['default']
     AdditionalSections: typeof import('./examples/page-header/additional-sections.vue')['default']
-    Advanced: typeof import('./examples/headless-form/advanced.vue')['default']
     AdvancedUsage: typeof import('./examples/tooltip/advanced-usage.vue')['default']
     Affix: typeof import('./examples/anchor/affix.vue')['default']
     Alert: typeof import('./examples/message-box/alert.vue')['default']

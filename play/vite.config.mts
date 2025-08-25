@@ -72,11 +72,22 @@ export default defineConfig(async ({ mode }) => {
       vueJsx(),
       Components({
         include: `${__dirname}/**`,
-        resolvers: ElementPlusResolver({
-          version: '2.0.0-dev.1',
-          importStyle: 'sass',
-          
-        }),
+        resolvers: [
+          // Element Plus 组件解析器 - 确保原有组件正常工作
+          ElementPlusResolver({
+            version: '2.0.0-dev.1',
+            importStyle: 'sass',
+          }),
+          // 自定义解析器 - 解析我们的 headless 组件
+          (componentName) => {
+            if (componentName.startsWith('ElHeadless')) {
+              return {
+                name: componentName,
+                from: '@sheryuwei/plus',
+              }
+            }
+          },
+        ],
         dts: false,
       }),
       mkcert(),
@@ -85,6 +96,7 @@ export default defineConfig(async ({ mode }) => {
 
     optimizeDeps: {
       include: ['vue', '@vue/shared', ...dependencies, ...optimizeDeps],
+      exclude: ['@sheryuwei/plus'],
     },
     esbuild: {
       target: 'chrome64',

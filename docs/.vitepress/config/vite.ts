@@ -28,7 +28,9 @@ const { dependencies: docsDeps } = getPackageDependencies(docPackage)
 const optimizeDeps = [...new Set([...epDeps, ...docsDeps])].filter(
   (dep) =>
     !dep.startsWith('@types/') &&
-    !['@element-plus/metadata', 'element-plus'].includes(dep) &&
+    !['@element-plus/metadata', 'element-plus', '@sheryuwei/plus'].includes(
+      dep
+    ) &&
     !['normalize.css'].includes(dep)
 )
 optimizeDeps.push(
@@ -46,6 +48,15 @@ const alias: AliasOptions = [
   ...(process.env.DOC_ENV === 'production'
     ? []
     : [
+        {
+          find: /^@sheryuwei\/plus(\/(es|lib))?$/,
+          replacement: path.resolve(projRoot, 'packages/element-plus/index.ts'),
+        },
+        {
+          find: /^@sheryuwei\/plus\/(es|lib)\/(.*)$/,
+          replacement: `${path.resolve(projRoot, 'packages')}/$2`,
+        },
+        // 保持旧的 element-plus 别名以兼容现有代码
         {
           find: /^element-plus(\/(es|lib))?$/,
           replacement: path.resolve(projRoot, 'packages/element-plus/index.ts'),
@@ -90,6 +101,18 @@ export const getViteConfig = ({ mode }: { mode: string }): ViteConfig => {
           // auto import icons
           // https://github.com/antfu/unplugin-icons
           IconsResolver(),
+          // Element Plus 组件自动导入
+          {
+            type: 'component',
+            resolve: (name: string) => {
+              if (name.startsWith('El')) {
+                return {
+                  name,
+                  from: '@sheryuwei/plus',
+                }
+              }
+            },
+          },
         ],
 
         // allow auto import and register components used in markdown

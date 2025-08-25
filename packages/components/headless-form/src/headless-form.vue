@@ -128,8 +128,12 @@ defineExpose({
   setFieldValue,
   setFieldError,
   submit: submitForm,
-  values,
-  errors,
-  meta,
+  values: values.value,
+  errors: errors.value,
+  meta: meta.value,
+  // 如果需要响应式引用，可以提供获取方法
+  getValues: () => values.value,
+  getErrors: () => errors.value,
+  getMeta: () => meta.value,
 })
 </script>

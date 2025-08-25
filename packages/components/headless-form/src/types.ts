@@ -1,13 +1,11 @@
 import type { InjectionKey, Ref } from 'vue'
 import type { ZodType } from 'zod'
-import type { ComponentSize } from '@element-plus/constants'
 
 export interface HeadlessFormContext {
   schema: ZodType
   values: Ref<Record<string, any>>
   errors: Ref<Record<string, string | undefined>>
   touched: Ref<Record<string, boolean>>
-  size: Ref<ComponentSize | undefined>
   disabled: Ref<boolean>
   validateField: (field: string) => Promise<boolean>
   setFieldValue: (field: string, value: any) => void
@@ -20,10 +18,10 @@ export interface HeadlessFormContext {
 }
 
 export interface HeadlessFormItemContext {
-  field: string
-  value: any
-  error: string | undefined
-  touched: boolean
+  field: Ref<string>
+  value: Ref<any>
+  error: Ref<string | undefined>
+  touched: Ref<boolean>
   setValue: (value: any) => void
   setTouched: (touched: boolean) => void
   validate: () => Promise<any>
